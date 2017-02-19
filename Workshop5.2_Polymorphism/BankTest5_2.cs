@@ -26,11 +26,17 @@ namespace Workshop5._2_Polymorphism
             branch.PrintCustomers();
             branch.PrintAccounts();
 
+            Console.WriteLine("Deposit $3000 to Account No. O1230126");
+            branch.Deposit("01230126", 3000);
+            Console.WriteLine("Deposit $10k to Account No. 0123456");
+            branch.Deposit("0123456", 10000);
+
+            //SavingsAccount.savingsInterestRate = 0.05;
             //Account temp = (Account)branch.AccountList[3];
-            //temp.Deposit(4000);
+            //temp.Deposit(3000);
 
             Console.WriteLine(branch.TotalDeposits());
-            Console.WriteLine("The bank pay a total of ${0} in interest",branch.TotalInterestPaid());
+            Console.WriteLine("The bank pays a total of ${0} in interest",branch.TotalInterestPaid());
             Console.WriteLine("The bank earns a total of ${0} in interest", branch.TotalIntererstEarn());
 
             branch.CreditInterest(); // This command tells the bank to execute the process to compute and credit interest to respective acccounts.

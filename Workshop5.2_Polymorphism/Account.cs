@@ -87,9 +87,12 @@ namespace Workshop5._2_Polymorphism
         public abstract void CalculateInterest();
         public abstract void CreditInterest();
 
-        public string Show()
+        public override string ToString()
         {
-            return (String.Format(accountNum + "\t\t" + data.Showcustomer() + "\t\t" + "{0}", currentAmt));
+            string customer = data.ToString();
+
+            return (String.Format("{0}\t\t{1}\t\t{2}",accountNum,customer,currentAmt) );
+
         }
     }
 }

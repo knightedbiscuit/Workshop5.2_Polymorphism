@@ -57,35 +57,39 @@ namespace Workshop5._2_Polymorphism
         public void AddAccount(Account holder)
         {
             accountList.Add(holder);
+            CreateCustList(); //system auto generate and update a customerdata list after accounts have been added.
         }
+
+        private void CreateCustList()
+        {
+            for (int j = 0; j < accountList.Count; j++)
+            {
+                Account temp = (Account)accountList[j];
+                if (custList.IndexOf(temp.Data) < 0) //check and omit addition of repeated customer objects into arraylist. One customer may own mutiple accounts.
+                {
+                    custList.Add(temp.Data);
+                }
+            }
+        } //system should automatically generate a customerdata list after accounts have been added.
 
         public void PrintAccounts()
         {
             //temp is just a variable. Here you are assigning the Account class (Base) variable to reference of the AccountList array containing 
             //the Derived objects of the Account class. When you execute the show() method, it will attempt to execute the show() in the Account class
-            //instead of the show() methods of the Derived objects. Hence polymorphism is useful here. bypass the show of Account to jump straight to
-            //what we expect the program to perform and that is to execute the method of the Derived objects.
+            //instead of the show() methods of the Derived objects. Hence dynamic bindg is useful here. bypass the show() method 
+            //of Account to jump straight to execute the show() method of the Derived objects, which is what we expect the program to perform
             for (int i = 0; i < accountList.Count; i++)
             {
                 Account temp = (Account)accountList[i];
-                Console.WriteLine(temp.Show());
+                Console.WriteLine(temp);
             }
         }
 
         public void PrintCustomers()
         {
-            for (int j = 0; j < accountList.Count; j++)
+            for (int i = 0; i < custList.Count; i++)
             {
-                Account temp = (Account)accountList[j];
-                if (custList.IndexOf(temp.Data) < 0) //check and omiit addition of repeated customer objects into arraylist. One customer may own mutiple accounts.
-                {
-                    custList.Add(temp.Data);
-                }
-            }
-
-            for (int k = 0; k < custList.Count; k++)
-            {
-                Console.WriteLine(custList[k]);
+                Console.WriteLine(custList[i]);
             }
 
         }
@@ -135,6 +139,24 @@ namespace Workshop5._2_Polymorphism
                 Account temp = (Account) accountList[i];
                 temp.CalculateInterest();
                 temp.CreditInterest();
+            }
+        }
+
+        public void Deposit(string accountNum, double amount)
+        {
+            bool gotaccount = false;
+            foreach (Account i in accountList)
+            {
+                 if (i.AccountNum == accountNum)
+                {
+                    i.Deposit(amount);
+                    gotaccount = true;
+                    break;
+                }
+            }
+            if (!gotaccount)
+            {
+                Console.WriteLine("No such account is found.");
             }
         }
 

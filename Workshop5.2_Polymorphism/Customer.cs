@@ -78,11 +78,6 @@ namespace Workshop5._2_Polymorphism
         { }
 
         //Method
-        public string Showcustomer()
-        {
-            return (String.Format(name + "\t\t" + address + "\t\t" + nric + "\t\t" + "{0}", age));
-        }
-
         public override string ToString()
         {
             return (String.Format("{0}\t\t{1}\t\t{2}\t\t{3} ", name, address, nric, age));
